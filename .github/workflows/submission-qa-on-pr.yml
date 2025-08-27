@@ -1,0 +1,63 @@
+name: Automated submission checks
+
+on:
+  pull_request:
+
+jobs:
+
+  folder-detect:
+    runs-on: ubuntu-latest
+    outputs:
+      FOLDER: ${{ steps.detect-folder.outputs.folder }}
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v4
+        with:
+            fetch-depth: 2
+      - name: Determine folder of changes
+        id: detect-folder
+        run: git diff --name-only HEAD^1 HEAD | python -c "import sys, os; print(os.path.commonpath([os.path.dirname((file.strip())) for file in sys.stdin]))" | (read FOLDER; echo "FOLDER=$FOLDER") >> $GITHUB_OUTPUT
+      - name: Fail if files not submitted into a subfolder
+        if: ${{ steps.detect-folder.outputs.FOLDER == '' }}
+        run: |
+            echo "::error::All submitted files must be placed in the same subfolder"
+            exit 1
+
+  folder-info:
+    runs-on: ubuntu-latest
+    needs: folder-detect
+    env:
+      FOLDER: ${{ needs.folder-detect.outputs.FOLDER }}
+    steps:
+      - name: Repository checkout
+        uses: actions/checkout@v4
+      - name: Total size of submission folder
+        run: echo "::notice::" $(du -sh "$FOLDER")
+      - name: Size information
+        run: du -sh "$FOLDER"/*
+
+  notebook-check:
+    needs: folder-detect
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    env:
+      FOLDER: ${{ needs.folder-detect.outputs.FOLDER }}
+    steps:
+      # PR simulates merge, inspect based on changes in merge commit
+      - name: Repository checkout
+        uses: actions/checkout@v4
+      - name: Setup Miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          activate-environment: test
+          miniforge-version: latest
+          environment-file: environment.yml
+      - name: Setup local env if exists
+        run: pip install -r "$FOLDER/requirements.txt"
+        if: ${{ hashFiles(join(needs.folder-detect.outputs.FOLDER, '/requirements.txt')) != '' }}
+      - name: Install QA packages
+        run: pip install nbqa pylint
+      - name: Run linter
+        run: nbqa pylint --output-format=colorized "$FOLDER"
