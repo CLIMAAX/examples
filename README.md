@@ -81,7 +81,7 @@ center by applying ASTER’s nighttime LST data-sets:
 a polygon or circle.
 
 6\. “Temporal” function: Define the temporal period as 01.07 to 31.08 of
-e.g. 2020-2025 (tick «Use a recurring date range» box)
+e.g. 2020-2025 (thick «recurring data range» box)
 
 7\. Select «Night»
 
@@ -109,7 +109,7 @@ in Kelvin, we need to convert it to Celsius. To do this, we use the
 Raster Calculator tool. After opening the tool, in the calculation field
 we enter:
 
-```("file_name.tif" \* 0.1) - 273.15```
+("file_name.tif" \* 0.1) - 273.15
 
 and then select the folder where the new file will be saved.
 
