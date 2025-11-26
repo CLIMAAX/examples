@@ -5,21 +5,20 @@ heatwaves and the urban heat island (UHI) effect, which refers to higher
 surface and air temperatures in urban areas compared to their rural
 surroundings.
 
-In the CLIMAAX Heatwave Risk Assessment Workflow, satellite-based LST
-images as the exposure component is analysed. The workflow currently
-defines the Landsat 8 image downloading methodology and related codes.
+In the CLIMAAX Heatwave Risk Assessment Workflow, we use satellite-based
+LST images as the exposure component. The workflow currently defines the
+Landsat 8 image download methodology and related codes.
 
-At the **Şanlıurfa and Mersin Metropolitan Municipalites**, Landsat 8
-datasets for daytime observations during the summer season have been
-already applied. However, since daytime land surface temperatures often
-exceed 60°C and are distributed relatively homogeneously across the city
-center, it was not possible to effectively visualize temperature
-variations or the urban heat island effect.
+At the **Şanlıurfa Metropolitan Municipality**, we have already applied
+Landsat 8 datasets for daytime observations during the summer season.
+However, since daytime land surface temperatures often exceed 60°C and
+are distributed relatively homogeneously across the city center, it was
+not possible to effectively visualize temperature variations or the
+urban heat island effect.
 
-Therefore, as joint working group from Mersin and Şanlıurfa Metropolitan
-Municipalities, we searched for another data source providing nighttime
-LST images. Two of the most widely used satellite sources for LST data
-are Terra ASTER (Advanced Spaceborne Thermal Emission and Reflection
+Therefore, we searched for another data source providing nighttime LST
+images. Two of the most widely used satellite sources for LST data are
+Terra ASTER (Advanced Spaceborne Thermal Emission and Reflection
 Radiometer) and Landsat 8 (Thermal Infrared Sensor – TIRS).
 
 Below is a comparison of their sensor and data characteristics:
@@ -54,22 +53,19 @@ urban heat island effect, especially in densely built city centers.
 - A simple additional code is required to convert the LST unit from
   Kelvin to degrees Celsius.
 
-- Preloaded “granules”should be clipped for desired area of concern.
+- Preloaded “granules” should be clipped for desired area of concern.
 
 In Şanlıurfa, we compared both data sources over the same location using
-ASTER night-time and Landsat 8 daytime maps. The results clearly
-demonstrated that night-time ASTER imagery provides a more effective
+ASTER nighttime and Landsat 8 daytime maps. The results clearly
+demonstrated that nighttime ASTER imagery provides a more effective
 visualization of the urban heat island effect.
 
 <img src="./media/image1.png" style="width:6.3in;height:2.28351in" />
 
-We have improved the Climaax Heatwave Risk Map of Şanlıurfa MM and
-Mersin MM city centres by applying ASTER’s night-time LST data-sets:
+We have improved the Climaax Heatwave Risk Map of Şanlıurfa MM city
+center by applying ASTER’s nighttime LST data-sets:
 
 <img src="./media/image2.png" style="width:6.29565in;height:2.5424in" />
-
-<img src="./media/image3.png"
-style="width:6.25865in;height:2.48391in" />
 
 **Step by Step Data Processing (We applied)**
 
@@ -97,7 +93,7 @@ sent via e-mail within a day
 9\. The incoming ASTER image file cannot be used directly in the
 workflow.
 
-The following pre-processing steps are required:
+The following preprocessing steps are required:
 
 - Convert the temperature values from Kelvin to Celsius.
 
@@ -113,7 +109,7 @@ in Kelvin, we need to convert it to Celsius. To do this, we use the
 Raster Calculator tool. After opening the tool, in the calculation field
 we enter:
 
-```("file_name.tif" * 0.1) - 273.15```
+```("file_name.tif" \* 0.1) - 273.15```
 
 and then select the folder where the new file will be saved.
 
@@ -140,9 +136,9 @@ properly in the workflow.
 
 **Conclusion**
 
-The results clearly demonstrated that night-time ASTER imagery provides
-a more effective visualization of the urban heat island effect. But,
-data analysis is more complex than for Landsat 8.
+The results clearly demonstrated that nighttime ASTER imagery provides a
+more effective visualization of the urban heat island effect. But data
+analysis is more complex than for Landsat 8.
 
 We hope that, temperature conversion from Kelvin to Celsius and clipping
 operation can be performed within in the workflow by means of additional
@@ -150,8 +146,8 @@ codes instead of manual ArcGIS operations.
 
 **For further explanation and contact:**
 
-**İhsan Topallı- MersinMM:** <ihsan@topalli-ai.com>
+**İhsan Topallı:** <ihsan@topalli-ai.com>
 
-**İzzettin Karabulut-Sanliurfa MM:** <karabulut6363@gmail.com>
+**İzzettin Karabulut:** <karabulut6363@gmail.com>
 
-**Tamer Atalay- Atalay Climate Consulting:** tamer@atalayconsulting.com
+**Tamer Atalay:** tamer@atalayconsulting.com
