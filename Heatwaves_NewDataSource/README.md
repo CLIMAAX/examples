@@ -1,4 +1,4 @@
-**Improving Land Surface Temperature (LST) Maps Using Nighttime Images**
+# Improving Land Surface Temperature (LST) Maps Using Nighttime Images
 
 Land Surface Temperature (LST) is a key indicator for analyzing
 heatwaves and the urban heat island (UHI) effect, which refers to higher
@@ -50,10 +50,8 @@ urban heat island effect, especially in densely built city centers.
 **Main disadvantages of ASTER Data**
 
 - Data analysis is more complex than for Landsat 8.
-
 - A simple additional code is required to convert the LST unit from
   Kelvin to degrees Celsius.
-
 - Preloaded “granules”should be clipped for desired area of concern.
 
 In Şanlıurfa, we compared both data sources over the same location using
@@ -71,7 +69,7 @@ Mersin MM city centres by applying ASTER’s night-time LST data-sets:
 <img src="./media/image3.png"
 style="width:6.25865in;height:2.48391in" />
 
-**Step by Step Data Processing (We applied)**
+## Step by Step Data Processing (We applied)
 
 1\. Go to : <https://search.earthdata.nasa.gov/>
 
@@ -138,7 +136,7 @@ under the LST Folder.
 14\. The file — the updated ASTER image — is now ready and working
 properly in the workflow.
 
-**Conclusion**
+## Conclusion
 
 The results clearly demonstrated that night-time ASTER imagery provides
 a more effective visualization of the urban heat island effect. But,
@@ -148,7 +146,7 @@ We hope that, temperature conversion from Kelvin to Celsius and clipping
 operation can be performed within in the workflow by means of additional
 codes instead of manual ArcGIS operations.
 
-**For further explanation and contact:**
+## For further explanation and contact:
 
 **İhsan Topallı- MersinMM:** <ihsan@topalli-ai.com>
 
