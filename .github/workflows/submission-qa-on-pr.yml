@@ -10,6 +10,7 @@ jobs:
     outputs:
       FOLDER: ${{ steps.detect-folder.outputs.folder }}
     steps:
+      # PR simulates merge, inspect based on changes in merge commit
       - name: Repository checkout
         uses: actions/checkout@v4
         with:
@@ -45,7 +46,6 @@ jobs:
     env:
       FOLDER: ${{ needs.folder-detect.outputs.FOLDER }}
     steps:
-      # PR simulates merge, inspect based on changes in merge commit
       - name: Repository checkout
         uses: actions/checkout@v4
       - name: Setup Miniconda
@@ -55,8 +55,7 @@ jobs:
           miniforge-version: latest
           environment-file: environment.yml
       - name: Setup local env if exists
-        run: pip install -r "$FOLDER/requirements.txt"
-        if: ${{ hashFiles(join(needs.folder-detect.outputs.FOLDER, '/requirements.txt')) != '' }}
+        run: if [ -f "$FOLDER/requirements.txt" ]; then pip install -r "$FOLDER/requirements.txt"; fi
       - name: Install QA packages
         run: pip install nbqa pylint
       - name: Run linter
